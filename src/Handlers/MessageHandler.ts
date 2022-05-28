@@ -122,7 +122,7 @@ export default class MessageHandler {
 		}
 		if (command.config?.adminOnly && !M.sender.isAdmin)
 			return void M.reply(
-				`Darling this command is only made for the group admins, Baka!`
+				`Darling! this command is only made for the group admins`
 			);
 		try {
 			await command.run(M, this.parseArgs(args));
