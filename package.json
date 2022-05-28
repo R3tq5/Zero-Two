@@ -12,7 +12,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/FantoX001/Zero-Two.git"
+        "url": "https://github.com/R3tq5/Zero-Two.git"
     },
     "keywords": [
         "bot",
@@ -20,12 +20,12 @@
         "whatsapp",
         "chitoge"
     ],
-    "author": "Fantox",
+    "author": "R3tq5",
     "license": "AGPL-3.0",
     "bugs": {
-        "url": "https://github.com/FantoX001/Zero-Two/issues"
+        "url": "https://github.com/R3tq5/Zero-Two/issues"
     },
-    "homepage": "https://github.com/FantoX001/Zero-Two#readme",
+    "homepage": "https://github.com/R3tq5/Zero-Two#readme",
     "devDependencies": {
         "@types/express": "^4.17.12",
         "@types/fs-extra": "^9.0.13",
