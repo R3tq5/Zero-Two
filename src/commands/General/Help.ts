@@ -57,7 +57,7 @@ export default class Command extends BaseCommand {
 
 │⋊ 𝕆𝕨𝕟𝕖𝕣: *${this.client.config.prefix}mod*
 
-│⋊ 𝕆𝕗𝕗𝕚𝕥𝕚𝕒𝕝 𝕊𝕦𝕡𝕡𝕠𝕣𝕥 𝔾𝕣𝕠𝕦𝕡: http://gg.gg/10xtwj
+│⋊ 𝕀𝕟𝕤𝕥𝕒𝕘𝕣𝕒𝕞: https://www.instagram.com/carl.ed_2003/
 
 ╰──────────────────𐏋  
 
