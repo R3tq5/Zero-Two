@@ -1,41 +1,137 @@
 import MessageHandler from '../../Handlers/MessageHandler'
+
 import BaseCommand from '../../lib/BaseCommand'
+
 import WAClient from '../../lib/WAClient'
+
 import { ISimplifiedMessage } from '../../typings'
+
 import axios from 'axios'
+
 import request from '../../lib/request'
+
 import { MessageType } from '@adiwajshing/baileys'
+
 // import { MessageType, Mimetype } from '@adiwajshing/baileys'
 
 export default class Command extends BaseCommand {
+
     constructor(client: WAClient, handler: MessageHandler) {
+
         super(client, handler, {
+
             command: 'waifu',
-            description: `sends you the Waifus aka\nGirls you can't have.`,
-            aliases: ['animegirl'],
+
+            description: `Will send you random waifu image.`,
+
+            aliases: ['wife'],
+
             category: 'weeb',
+
             usage: `${client.config.prefix}waifu`,
+
             baseXp: 50
+
         })
+
     }
 
     run = async (M: ISimplifiedMessage): Promise<void> => {
-        const { data } = await axios.get('https://waifu.pics/api/sfw/waifu')
-        const buffer: any = await request.buffer(data.url);
-        const media:any = await this.client.prepareMessage(M.from,buffer,MessageType.image);
 
-        const buttons = [
-            {buttonId: 'waifu', buttonText: {displayText: 'More Waifu'}, type: 1},
-            {buttonId: 'loli', buttonText: {displayText: 'Gib loli'}, type: 1}
-          ]
-          const buttonMessage: any = {
-            contentText: 'More than one waifu, will definitely ruin your laifu my Darling.\n',
-            footerText: '',
-            buttons: buttons,
-            headerType: 4,
-            imageMessage: media.message?.imageMessage
+        // fetch result of https://waifu.pics/api/sfw/waifu from the API using axios
+
+        const { data } = await axios.get('https://api.waifu.im/random/?is_nsfw=false&gif=false&order_by=UPLOADED_AT&many=false&full=false')
+
+        const buffer = await request.buffer(data.url).catch((e) => {
+
+            return void M.reply(e.message)
+
+        })
+
+        while (true) {
+
+            try {
+
+                M.reply(
+
+                    buffer || 'Could not fetch image. Please try again later',
+
+                    MessageType.image,
+
+                    undefined,
+
+                    undefined,
+
+                    `*💫 Here it is.*\n`,
+
+                    undefined
+
+                ).catch((e) => {
+
+                    console.log(`This Error occurs when an image is sent via M.reply()\n Child Catch Block : \n${e}`)
+
+                    // console.log('Failed')
+
+                    M.reply(`Could not fetch image. Here's the URL: ${data.url}`)
+
+                })
+
+                break
+
+            } catch (e) {
+
+                // console.log('Failed2')
+
+                M.reply(`Could not fetch image. Here's the URL : ${data.url}`)
+
+                console.log(`This Error occurs when an image is sent via M.reply()\n Parent Catch Block : \n${e}`)
+
+            }
+
         }
-          await this.client.sendMessage(M.from, buttonMessage, MessageType.buttonsMessage)
+
+        return void null
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+       
+           
+      
+            
+        
+            
+            
+       
+    
+
+ 
+    
+      
+      
+
+       
+           
+            
+       
+          
+           
+            
+        
+          
+            
+       
+   
       
     }
 }
